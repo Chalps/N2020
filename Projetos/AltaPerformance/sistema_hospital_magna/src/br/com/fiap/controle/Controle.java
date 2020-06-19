@@ -1,25 +1,24 @@
 package br.com.fiap.controle;
 
 import br.com.fiap.atendimento.Atendimento;
+import br.com.fiap.fila.FilaPacientes;
 import br.com.fiap.paciente.Paciente;
 import br.com.fiap.paciente.StatusPaciente;
-
-import java.util.LinkedList;
 
 import static java.lang.Integer.parseInt;
 import static javax.swing.JOptionPane.*;
 
 public class Controle {
-    private LinkedList<Paciente> filaAtendimento;
-    private LinkedList<Paciente> filaInternacao;
-    private LinkedList<Paciente> listaPacientes;
+    private FilaPacientes filaAtendimento;
+    private FilaPacientes filaInternacao;
+    private FilaPacientes listaPacientes;
     private int leitosTotal, leitosUso;
     private Atendimento atendimento;
 
     public Controle(int leitos) {
-        this.filaAtendimento = new LinkedList<>();
-        this.filaInternacao = new LinkedList<>();
-        this.listaPacientes = new LinkedList<>();
+        this.filaAtendimento = new FilaPacientes();
+        this.filaInternacao = new FilaPacientes();
+        this.listaPacientes = new FilaPacientes();
         this.leitosTotal = leitos;
     }
 
@@ -60,14 +59,14 @@ public class Controle {
 
     public void liberarVaga(int cpf, StatusPaciente status) {
         boolean nAchou = true;
-        for (Paciente p : listaPacientes) {
-            if (p.getStatus() == StatusPaciente.internado) {
-                if (p.getCpf() == cpf) {
-                    p.setStatus(status);
+        for (int i = 0; i < listaPacientes.size(); i++) {
+            if (listaPacientes.get(i).getStatus() == StatusPaciente.internado) {
+                if (listaPacientes.get(i).getCpf() == cpf) {
+                    listaPacientes.get(i).setStatus(status);
                     showMessageDialog(null, "O paciente com o cpf: " + cpf + " foi liberado com sucesso!", "Liberação de vagas", INFORMATION_MESSAGE);
                     leitosUso--;
                     if (!filaInternacao.isEmpty()) {
-                        filaInternacao.removeFirst().setStatus(StatusPaciente.internado);
+                        filaInternacao.remove().setStatus(StatusPaciente.internado);
                     }
                     nAchou = false;
                     break;

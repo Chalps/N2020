@@ -49,10 +49,17 @@ public class FilaPacientes {
         return paciente;
     }
 
+    public int size() {
+        return this.size;
+    }
+
+    public Paciente getLast() {
+        return this.fim.dado;
+    }
+
     public Paciente get(int index) {
-        NO p = null;
+        NO p = ini;
         for (int i = 0; i < size; i++) {
-            p = ini;
             if (i == index) {
                 break;
             }
