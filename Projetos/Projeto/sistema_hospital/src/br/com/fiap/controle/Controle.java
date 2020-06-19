@@ -89,7 +89,7 @@ public class Controle {
         if (nAchou) showMessageDialog(null, "Paciente não encontrado", "Liberação de vagas", ERROR_MESSAGE);
     }
 
-    public boolean temVaga() {
+    private boolean temVaga() {
         if (leitosTotal - leitosUso > 0) {
             return true;
         } else {
@@ -97,7 +97,7 @@ public class Controle {
         }
     }
 
-    public void erro(String msg) {
+    private void erro(String msg) {
         showMessageDialog(null, msg, "Erro", ERROR_MESSAGE);
     }
 }

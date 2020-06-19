@@ -15,9 +15,7 @@ public class Paciente {
 
     public void setStatus(StatusPaciente status) { this.status = status; }
 
-    public StatusPaciente getStatus() {
-        return status;
-    }
+    public StatusPaciente getStatus() { return status; }
 
     @Override
     public String toString() {
